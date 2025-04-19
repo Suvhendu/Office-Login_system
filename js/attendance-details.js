@@ -5,9 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const date = urlParams.get("date");
 
-  // Retrieve attendance data from localStorage
-  const attendanceData = JSON.parse(localStorage.getItem("attendanceData")) || [];
-  
+  // Ensure loggedInUser is properly retrieved and attendanceData is initialized
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!loggedInUser || !loggedInUser.employeeId) {
+    alert('No logged-in user found. Please log in again.');
+    window.location.href = 'login.html';
+  }
+
+  const userSpecificKey = (key) => `${loggedInUser.employeeId}_${key}`;
+  const attendanceData = JSON.parse(localStorage.getItem(userSpecificKey("attendanceData"))) || [];
+
   // Find the specific day's data
   const attendance = attendanceData.find(entry => entry.date === date);
 
@@ -68,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Punch Out:</strong> ${attendance.punchOut || "N/A"}</p>
       <p><strong>Total Hours:</strong> ${totalHoursWorked}</p>
       <p><strong>Total Break Duration:</strong> ${totalBreakDuration} minutes</p>
+      <p><strong>Attendance Status:</strong> ${attendance.attendanceStatus || "Absent"}</p>
     `;
   } else {
     // If no attendance data is available for the date

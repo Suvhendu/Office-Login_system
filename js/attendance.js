@@ -21,8 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get the number of days in the month
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // Retrieve attendance data from localStorage
-  const attendanceData = JSON.parse(localStorage.getItem("attendanceData")) || [];
+  // Ensure loggedInUser is properly retrieved and attendanceData is initialized
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!loggedInUser || !loggedInUser.employeeId) {
+    alert('No logged-in user found. Please log in again.');
+    window.location.href = 'login.html';
+  }
+
+  const userSpecificKey = (key) => `${loggedInUser.employeeId}_${key}`;
+  const attendanceData = JSON.parse(localStorage.getItem(userSpecificKey("attendanceData"))) || [];
 
   // Add empty days for the first week
   for (let i = 0; i < firstDay; i++) {
@@ -40,8 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     dayEl.className = "day";
 
     if (attendance) {
-      dayEl.classList.add(attendance.punchIn && attendance.punchOut ? "present" : "absent");
-      dayEl.textContent = day;
+      // Replace 'N/A' with 'Absent' for attendance status
+      const status = attendance.attendanceStatus || "Absent";
+      dayEl.classList.add(status === "Full Day" ? "present" : status === "Half Day" ? "half-day" : "absent");
+      dayEl.textContent = `${day} (${status})`;
 
       // Add click event to redirect to attendance-details.html
       dayEl.addEventListener("click", () => {

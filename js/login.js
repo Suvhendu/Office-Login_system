@@ -42,25 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         isAdminInput.value = this.value === 'admin';
     });
 
-    // Retrieve and display users in the table
-    const userTable = document.getElementById('userTable');
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-    if (userTable) {
-        users.forEach((user, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${user.name}</td>
-                <td>${user.employeeId}</td>
-                <td>${user.role}</td>
-            `;
-            userTable.appendChild(row);
-        });
-    } else {
-        console.error('User Table not found in the DOM.');
-    }
-
+    // Show/Hide Password Functionality
     const passwordInput = document.getElementById('password');
     const showPasswordCheckbox = document.getElementById('showPassword');
 

@@ -80,9 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
         breakTimerDisplay.textContent = "Break Timer: 00:00:00";
     }
 
+    // Update localStorage keys to be user-specific by appending the employeeId
+    const userSpecificKey = (key) => `${loggedInUser.employeeId}_${key}`;
+
     // Retrieve existing attendance data from localStorage
-    let attendanceData = JSON.parse(localStorage.getItem("attendanceData")) || [];
-    let currentSession = JSON.parse(localStorage.getItem("currentSession")) || null;
+    let attendanceData = JSON.parse(localStorage.getItem(userSpecificKey("attendanceData"))) || [];
+    let currentSession = JSON.parse(localStorage.getItem(userSpecificKey("currentSession"))) || null;
 
     // Restore Timer on Page Load
     if (currentSession && currentSession.punchIn && !currentSession.punchOut) {
@@ -125,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // Save the session to localStorage
-        localStorage.setItem("currentSession", JSON.stringify(currentSession));
+        localStorage.setItem(userSpecificKey("currentSession"), JSON.stringify(currentSession));
 
         // Start the timer
         if (!timerInterval) {
@@ -135,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         displayMessage("Punched in successfully!", "#28a745");
     });
 
-    // Punch Out
+    // Update Punch Out logic to mark attendance based on total work time
     punchOutButton.addEventListener("click", () => {
         if (!currentSession || !currentSession.punchIn) {
             displayMessage("You need to punch in first!", "#dc3545");
@@ -152,12 +155,21 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSession.punchOut = punchOutTime;
         currentSession.totalHours = `${Math.floor(totalHours)}h ${Math.round((totalHours % 1) * 60)}m`;
 
+        // Mark attendance based on total work time
+        if (totalHours >= 10) {
+            currentSession.attendanceStatus = "Full Day";
+        } else if (totalHours >= 5) {
+            currentSession.attendanceStatus = "Half Day";
+        } else {
+            currentSession.attendanceStatus = "Absent";
+        }
+
         // Save the session to attendance data
         attendanceData.push(currentSession);
-        localStorage.setItem("attendanceData", JSON.stringify(attendanceData));
+        localStorage.setItem(userSpecificKey("attendanceData"), JSON.stringify(attendanceData));
 
         // Clear the current session from localStorage
-        localStorage.removeItem("currentSession");
+        localStorage.removeItem(userSpecificKey("currentSession"));
 
         // Stop the timer
         if (timerInterval) {
@@ -172,11 +184,16 @@ document.addEventListener("DOMContentLoaded", () => {
         displayMessage("Punched out successfully!", "#28a745");
     });
 
-    // Handle Breaks
+    // Ensure currentSession is properly initialized before accessing breakDuration
     const handleBreak = (breakDuration) => {
-        if (!currentSession || !currentSession.punchIn) {
-            alert("You need to punch in first!");
+        if (!currentSession) {
+            displayMessage("You need to punch in first!", "#dc3545");
             return;
+        }
+
+        // Initialize breakDuration if it doesn't exist
+        if (!currentSession.breakDuration) {
+            currentSession.breakDuration = 0;
         }
 
         currentSession.breakDuration += breakDuration;
@@ -290,4 +307,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set current year in the footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Add theme toggle functionality
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-theme");
+            document.body.classList.toggle("light-theme");
+        });
+    }
+
+    // Add toast notification functionality
+    function showToast(message) {
+        const toastContainer = document.getElementById("toastContainer");
+        if (!toastContainer) return;
+
+        const toast = document.createElement("div");
+        toast.className = "toast show";
+        toast.textContent = message;
+
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+
+    // Example usage of toast notifications
+    showToast("Welcome to the Dashboard!");
 });

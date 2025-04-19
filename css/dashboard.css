@@ -7,9 +7,11 @@ html, body {
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
-    color: #fff;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
 }
 
@@ -163,12 +165,17 @@ body {
 
 /* Timer Panel */
 .card {
-    background: #fff;
-    color: #333;
+    background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Buttons */
@@ -182,6 +189,23 @@ body {
     transform: scale(1.1); /* Slight zoom on hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
     background-color: #0056b3; /* Slightly darker hover effect */
+}
+
+/* Style buttons */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 /* Loading Spinner */
@@ -223,10 +247,63 @@ body.loaded .loading-spinner {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #1f1f1f, #3a3a3a); /* Blackish grey gradient */
-    color: #ccc; /* Lighter font color for contrast */
+    background-color: #007bff;
+    color: white;
     text-align: center;
-    padding: 15px 0;
-    margin-top: auto; /* Push the footer to the bottom */
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow above the footer */
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Add smooth transitions and hover effects */
+button, a {
+    transition: all 0.3s ease;
+}
+
+/* Add a light/dark theme toggle */
+body.light-theme {
+    background: #f5f5f5;
+    color: #333;
+}
+
+body.dark-theme {
+    background: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-theme .card {
+    background: #1e1e1e;
+    color: #f5f5f5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Add custom scrollbars */
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 5px;
+}
+
+/* Add styles for toast notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
 }
