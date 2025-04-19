@@ -37,10 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const punchIn = new Date(attendance.punchIn);
       const punchOut = new Date(attendance.punchOut);
 
-      console.log("Punch In:", punchIn);
-      console.log("Punch Out:", punchOut);
+      console.log("Raw Punch In:", attendance.punchIn);
+      console.log("Raw Punch Out:", attendance.punchOut);
+      console.log("Punch In Date Object:", punchIn);
+      console.log("Punch Out Date Object:", punchOut);
 
       if (!isNaN(punchIn.getTime()) && !isNaN(punchOut.getTime()) && punchOut > punchIn) {
+        if (typeof totalBreakDuration !== "number" || isNaN(totalBreakDuration)) {
+          totalBreakDuration = 0; // Default to 0 if invalid
+        }
+
         const totalMinutesWorked = Math.floor((punchOut - punchIn) / (1000 * 60)) - totalBreakDuration;
         const hours = Math.floor(totalMinutesWorked / 60);
         const minutes = totalMinutesWorked % 60;
@@ -49,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Invalid punch in/out times.");
         totalHoursWorked = "Invalid punch times";
       }
+    } else {
+      console.error("Punch In or Punch Out is missing.");
+      totalHoursWorked = "N/A";
     }
 
     // Populate attendance details
