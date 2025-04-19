@@ -1,0 +1,47 @@
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+}
+
+.form-container {
+    background: #fff;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+}
+
+h2 {
+    font-weight: bold;
+    color: #343a40;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, #007bff, #0056b3);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #0056b3, #003d80);
+}
+
+.btn-secondary {
+    background: linear-gradient(to right, #6c757d, #495057);
+    border: none;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(to right, #495057, #343a40);
+}
+
+/* Light Theme */
+body.light-theme {
+    background: #f8f9fa;
+    color: #212529;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background: #212529;
+    color: #f8f9fa;
+}

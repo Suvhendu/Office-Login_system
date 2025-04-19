@@ -1,0 +1,125 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif; /* Use Poppins font */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* New gradient colors */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Registration Container */
+.container {
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 20px; /* Increased border-radius for more curved edges */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-container h2 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Styling */
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+}
+
+/* Button Styling */
+.btn-primary {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Matching gradient for button */
+    border: none;
+    border-radius: 30px; /* Curved edges for the button */
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #feb47b, #ff7e5f); /* Reverse gradient on hover */
+}
+
+/* Error Message */
+#errorMessage {
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+
+.text-danger {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Link Styling */
+.text-primary {
+    color: #6a11cb;
+    font-weight: bold;
+}
+
+.text-primary:hover {
+    color: #2575fc;
+    text-decoration: none;
+}
+
+#registerForm {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+select.form-control {
+    appearance: none; /* Remove default dropdown arrow */
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient background */
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+select.form-control:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input-group .input-group-text {
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Matching gradient for icons */
+    color: #fff;
+    border: none;
+}

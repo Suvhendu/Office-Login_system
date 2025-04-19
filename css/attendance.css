@@ -1,0 +1,151 @@
+/* General body styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple to blue gradient */
+  margin: 0;
+  padding: 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Header styling */
+.header {
+  background: linear-gradient(135deg, #7b2ff7, #5a00d6); /* Purple gradient for header */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.8s ease-in-out;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Calendar styling */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #ffffff, #e3e3ff); /* Subtle white-to-light-purple gradient */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Day styling */
+.day {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #f9f9ff; /* Light purple for days */
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+}
+
+.day:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #e0e0ff; /* Slightly darker purple on hover */
+}
+
+/* Day header styling */
+.day.header {
+  font-weight: bold;
+  background: linear-gradient(135deg, #7b2ff7, #5a00d6); /* Purple gradient for day headers */
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Present day styling */
+.day.present {
+  background: linear-gradient(135deg, #28a745, #218838); /* Green gradient for present days */
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+
+.day.present::after {
+  content: "✔";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Absent day styling */
+.day.absent {
+  background: linear-gradient(135deg, #dc3545, #c82333); /* Red gradient for absent days */
+  color: white;
+  font-weight: bold;
+  position: relative;
+}
+
+.day.absent::after {
+  content: "✘";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Empty day styling */
+.day.empty {
+  background: transparent;
+  border: none;
+}
+
+/* Button container styling */
+.button-container {
+  margin-top: 20px;
+}
+
+a.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #7b2ff7; /* Purple button */
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+a.btn:hover {
+  background-color: #5a00d6; /* Darker purple on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dashboard.css"> <!-- Corrected custom styles path -->
+    <link rel="icon" href="images/favicon-modern.png" type="image/png"> <!-- Corrected favicon path -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="js/dashboard.js" defer></script> <!-- Ensure this file exists -->
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="bg-primary text-white p-3 shadow" style="height: 100vh; position: fixed; width: 250px;">
+        <h3 class="text-center mb-4" style="font-weight: bold; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);">
+            <i class="fas fa-bars"></i> Menu
+        </h3>
+        <ul class="list-unstyled">
+            <li class="mb-3">
+                <a href="dashboard.html" class="text-white d-flex align-items-center p-2 rounded hover-effect">
+                    <i class="fas fa-tachometer-alt mr-2"></i> Dashboard
+                </a>
+            </li>
+            <li class="mb-3">
+                <a href="attendance.html" class="text-white d-flex align-items-center p-2 rounded hover-effect">
+                    <i class="fas fa-clock mr-2"></i> Attendance
+                </a>
+            </li>
+            <li class="mb-3">
+                <a href="settings.html" class="text-white d-flex align-items-center p-2 rounded hover-effect">
+                    <i class="fas fa-cogs mr-2"></i> Settings
+                </a>
+            </li>
+            <li>
+                <a href="help.html" class="text-white d-flex align-items-center p-2 rounded hover-effect">
+                    <i class="fas fa-question-circle mr-2"></i> Help
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Toggle Sidebar Button -->
+    <button id="toggleSidebar" class="btn btn-primary shadow" style="position: fixed; top: 20px; left: 260px; z-index: 1000;">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <header class="bg-primary text-white text-center py-4 rounded shadow mb-4">
+                <h1><i class="fas fa-tachometer-alt"></i> Employee Dashboard</h1>
+            </header>
+
+            <!-- Welcome Panel -->
+            <div class="card p-4 mb-4 shadow" style="background: linear-gradient(to right, #6a11cb, #2575fc); color: white;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4><i class="fas fa-user"></i> Welcome, <span id="userName">John Doe</span></h4>
+                    <h5><i class="fas fa-calendar-alt"></i> <span id="currentDate"></span></h5>
+                </div>
+                <p><i class="fas fa-id-badge"></i> Employee ID: <span id="employeeId">N/A</span></p>
+                <p><i class="fas fa-clock"></i> Current Time: <span id="currentTime">00:00:00</span></p>
+            </div>
+
+            <!-- Break Timer -->
+            <div class="text-center mt-3">
+                <!-- Timer Panel -->
+                <div class="card p-4 mb-4 shadow">
+                    <div class="text-center mb-4">
+                        <div id="timerDisplay" style="font-size: 2rem; font-weight: bold; color: #007bff;">
+                            <i class="fas fa-clock"></i> 00:00:00
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h5 id="breakTimerDisplay" style="font-size: 1.5rem; font-weight: bold; color: #ffc107;">
+                            Break Timer: 00:00:00
+                        </h5>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-6 mb-3">
+                            <button id="punchIn" class="btn btn-success btn-lg btn-block shadow">
+                                <i class="fas fa-sign-in-alt"></i> Punch In
+                            </button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button id="punchOut" class="btn btn-danger btn-lg btn-block shadow">
+                                <i class="fas fa-sign-out-alt"></i> Punch Out
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <button id="longBreak" class="btn btn-warning btn-lg btn-block shadow">
+                                <i class="fas fa-coffee"></i> Long Break
+                            </button>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button id="smallBreak" class="btn btn-info btn-lg btn-block shadow">
+                                <i class="fas fa-coffee-togo"></i> Small Break
+                            </button>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button id="restroomBreak" class="btn btn-secondary btn-lg btn-block shadow">
+                                <i class="fas fa-restroom"></i> Restroom Break
+                            </button>
+                        </div>
+                        <div class="col-md-12">
+                            <button id="stopBreak" class="btn btn-dark btn-lg btn-block shadow">
+                                <i class="fas fa-stop-circle"></i> Stop Break
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <p id="actionMessage" style="font-size: 1.2rem; font-weight: bold; color: #28a745;"></p>
+                </div>
+
+                <!-- Logout Button -->
+                <div class="text-center mt-4">
+                    <button id="logout" class="btn btn-danger btn-lg shadow">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; <span id="currentYear"></span> Office Punch System. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Dynamically update the year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
